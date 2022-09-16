@@ -15,7 +15,6 @@ namespace JackSparrus.State
             base.RunState(window);
 
             Bitmap screenBitmap = WindowManager.CreateScreenBitmap();
-            screenBitmap.Save("screenTestounet.png", ImageFormat.Png);
             window.TreasureHub.UpdateHubFrom(screenBitmap);
 
             screenBitmap.Dispose();

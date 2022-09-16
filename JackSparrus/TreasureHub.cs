@@ -56,7 +56,7 @@ namespace JackSparrus
             };
 
             this.Rows = new List<TreasureRow>();
-
+            
             this.tEngine = OcrApi.Create();
             this.tEngine.Init(Patagames.Ocr.Enums.Languages.French);
         }
@@ -67,9 +67,8 @@ namespace JackSparrus
 
             this.Rows.Clear();
 
-            Bitmap startBitmap = screen.Clone(new Rectangle(0, 0, 50, 50), screen.PixelFormat);
-            //Point hubStartPoint = SearchPattern(startBitmap, this.hubStartBitmap, out float bestResult);
-            Point hubStartPoint = new Point(8, 14);
+            Bitmap startBitmap = screen.Clone(new Rectangle(0, 0, 60, 140), screen.PixelFormat);
+            Point hubStartPoint = SearchPattern(startBitmap, this.hubStartBitmap, out float bestResult);
             startBitmap.Dispose();
 
             this.startFirstRow = new Point(hubStartPoint.X + 23, hubStartPoint.Y + 69);
@@ -77,7 +76,7 @@ namespace JackSparrus
             Point startRow = this.startFirstRow;
 
             Bitmap iconBitmap = screen.Clone(new Rectangle(startRow.X, startRow.Y, 22, 31), screen.PixelFormat);
-            Bitmap flagBitmap = screen.Clone(new Rectangle(startRow.X + 288, startRow.Y, 19, 31), screen.PixelFormat);
+            Bitmap flagBitmap = screen.Clone(new Rectangle(startRow.X + 260, startRow.Y, 19, 31), screen.PixelFormat);
             Bitmap rowBitmap = screen.Clone(new Rectangle(startRow.X + 22, startRow.Y, 285 - 19, 31), screen.PixelFormat);
 
             int i = 0;
@@ -266,16 +265,14 @@ namespace JackSparrus
 
             currentRow.WebHintPosition = this.GetNewPosition(direction, displacement);
 
-            Point pointToClick = new Point(this.startFirstRow.X + 288 + 10, this.startFirstRow.Y + indexCurrentRow * 31 + 15);
-
-            WindowManager.MoveMouseTo(pointToClick.X, pointToClick.Y);
+            Point pointToClick = new Point(this.startFirstRow.X + 275, this.startFirstRow.Y + indexCurrentRow * 31 + 5);
 
             WindowManager.ClickOn(pointToClick.X, pointToClick.Y);
 
             Size screenSize = WindowManager.GetScreenSize();
             Random rand = new Random();
             Thread.Sleep(50 + rand.Next(0, 20));
-            WindowManager.MoveMouseTo(screenSize.Width / 2 + rand.Next(-50, 50), screenSize.Height / 2 + rand.Next(-50, 50));
+            //WindowManager.MoveMouseTo(screenSize.Width / 2 + rand.Next(-50, 50), screenSize.Height / 2 + rand.Next(-50, 50));
 
             //Bitmap newScreenShot = WindowManager.CreateScreenBitmap();
             //this.UpdateHubFrom(newScreenShot);

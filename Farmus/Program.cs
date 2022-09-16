@@ -482,7 +482,7 @@ namespace Farmus
         {
             Random rand = new Random();
 
-            MoveMouseTo(posX, posY);
+            //MoveMouseTo(posX, posY);
             Program.SendMessage((int)ptr, Program.WM_LBUTTONDOWN, 0x00000001, CreateLParam(posX, posY));
             Thread.Sleep(100);
             Program.SendMessage((int)ptr, Program.WM_LBUTTONUP, 0x00000001, CreateLParam(posX + (int)(rand.NextDouble() * 4) - 2, posY + (int)(rand.NextDouble() * 4) - 2));
